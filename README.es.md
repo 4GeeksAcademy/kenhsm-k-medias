@@ -72,13 +72,17 @@ DATABASE_URL="postgresql://<USUARIO>:<CONTRASEÑA>@<HOST>:<PUERTO>/<NOMBRE_BD>"
 DATABASE_URL="postgresql://mi_usuario:mi_contraseña@localhost:5432/mi_base_de_datos"
 ```
 
-## Ejecutando la Aplicación
+## Ejecutando el análisis
 
-Para ejecutar la aplicación, ejecuta el script app.py desde la raíz del directorio del proyecto:
+Ejecuta el flujo de California Housing desde la raíz del proyecto:
 
 ```bash
 python src/app.py
 ```
+
+El script descarga el dataset en `data/raw/housing.csv` si aún no existe, reserva un 20 % para test y ajusta un K-Means de 6 clusters usando `Latitude`, `Longitude` y `MedInc`. Guarda las etiquetas y el gráfico en `data/processed/`, y los modelos K-Means y Random Forest en `models/`. También imprime medianas por cluster y métricas del clasificador. Estas métricas comparan sus predicciones con las etiquetas generadas por K-Means, no con categorías reales.
+
+Los grupos combinan geografía e ingreso medio: las medianas muestran varios grupos en el área de Los Ángeles con ingresos distintos (aproximadamente 2.86, 5.09 y 10.12 en la escala `MedInc`), mientras que otros corresponden a zonas del interior y del área de la Bahía. En el gráfico, los puntos de test se superponen a los de train con el color del cluster asignado.
 
 ## Añadiendo Modelos
 

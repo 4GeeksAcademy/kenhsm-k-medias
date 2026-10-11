@@ -72,13 +72,17 @@ DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>"
 DATABASE_URL="postgresql://my_user:my_password@localhost:5432/my_database"
 ```
 
-## Running the Application
+## Running the analysis
 
-To run the application, execute the app.py script from the root directory of the project:
+Run the California Housing workflow from the project root:
 
 ```bash
 python src/app.py
 ```
+
+The script downloads the dataset to `data/raw/housing.csv` if needed, holds out 20% for testing, and fits a 6-cluster K-Means model using `Latitude`, `Longitude`, and `MedInc`. It saves labeled data and a plot under `data/processed/`, and the K-Means and Random Forest models under `models/`. It also prints per-cluster medians and classifier metrics. Those metrics compare the classifier with K-Means-generated labels, not ground-truth categories.
+
+The clusters combine geography and median income. The medians show several groups around Los Angeles at different income levels (about 2.86, 5.09, and 10.12 on the `MedInc` scale), while others correspond to inland and Bay Area locations. Test points are overlaid on the training points in the plot using their assigned cluster color.
 
 ## Adding Models
 
